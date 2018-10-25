@@ -1,0 +1,39 @@
+import albanil.*
+import obrero.*
+import gasista.*
+import plomero.*
+import electricista.*
+import obra.*
+
+describe "Obreros" {
+
+	const obra = new Obra()
+	const albanil1 = new Albanil()
+	const albanil2 = new Albanil()
+	const gasista1 = new Gasista()
+	const gasista2 = new Gasista()
+	const plomero = new Plomero()
+
+	fixture {
+		obra.ladrillos(1000)
+		obra.metrosDeCanio(400)
+		obra.fosforos(8000)
+		obra.arandelas(500)
+		
+		obra.agregarObrero(albanil1)
+		obra.agregarObrero(albanil2)
+		obra.agregarObrero(gasista1)
+		obra.agregarObrero(gasista2)
+		obra.agregarObrero(plomero)
+		
+		albanil1.estaDeLicencia(true)
+	}
+
+	test "registran su consumo en la obra" {
+		obra.registrarJornada()
+		assert.equals(900, obra.ladrillos())
+		assert.equals(384, obra.metrosDeCanio())
+		assert.equals(7960, obra.fosforos())
+		assert.equals(470, obra.arandelas())
+	}
+}
