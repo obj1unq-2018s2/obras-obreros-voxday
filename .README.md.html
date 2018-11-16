@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>D:\carlos\educ\obj1\proyectosSueltos\obreros\.README.md.html</title>
+<title>D:\carlos\educ\obj1\proyectosSueltos\obreros-emergencia\.README.md.html</title>
 
 
 <style type="text/css">
@@ -641,21 +641,19 @@ function setDocumentScrollTop(ypos)
 <body class="markdown-body">
 <h1> <a id="obras-y-obreros" class="anchor" href="#obras-y-obreros" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Obras y obreros</h1> 
 <p>Debemos armar un modelo de obras en construcci&oacute;n, y los obreros que trabajan en ellas.</p> 
-<h2> <a id="modelo-b&aacute;sico" class="anchor" href="#modelo-b%C3%A1sico" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Modelo b&aacute;sico</h2> 
-<p>Una obra requiere, para su finalizaci&oacute;n, de trabajos de distintas caracter&iacute;sticas. A su vez, contamos con distintos tipos de obrero, los obreros de un tipo se encargar&aacute;n de cierto trabajo. Del trabajo que realiza un obrero en una obra nos interesa: lo que <em>aporta</em> para que la obra se vaya acercando a su finalizaci&oacute;n, y lo que <em>consume</em> de materiales.</p> 
-<p>Para cada obrero se debe registrar si est&aacute; o no de licencia, esto puede cambiar en cualquier momento.</p> 
-<p>Cada obra cuenta, en cada momento, con una plantilla con los obreros que est&aacute;n asignados a la misma. Los <strong>obreros disponibles</strong> para una obra son los que est&aacute;n en su plantilla, y no est&aacute;n de licencia. En cualquier momento se tiene que poder agregar o quitar a un obrero de la plantilla.</p> 
-<p>Se deben considerar cuatro tipos de obreros: <em>alba&ntilde;iles</em>, <em>plomeros</em>, <em>electricistas</em> y <em>gasistas</em>. En cada <em>jornada de trabajo</em>:</p> 
+<h2> <a id="plantilla-consumo-de-materiales" class="anchor" href="#plantilla-consumo-de-materiales" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Plantilla, consumo de materiales</h2> 
+<p>En una obra trabajan obreros de distinto tipo. Consideramos cuatro tipos de obreros: <em>alba&ntilde;iles</em>, <em>plomeros</em>, <em>electricistas</em> y <em>gasistas</em>.<br /> El modelo que construyamos debe registrar, y dar informaci&oacute;n sobre, la actividad que desarrollan los obreros en cada <em>jornada laboral</em>, o sea, en cada d&iacute;a en que se trabaja en la obra.</p> 
+<p>Para llevar a cabo una obra, se requieren distintos materiales; en este modelo nos van a interesar los siguientes: ladrillos, ca&ntilde;o, cable, cinta, f&oacute;sforos y arandelas. Para cada obra, se debe conocer en cada momento el <em>stock disponible</em> de cada uno de estos materiales.</p> 
+<p>Los obreros <em>consumen</em> estos materiales para llevar a cabo sus tareas. Qu&eacute; consumen, y cu&aacute;nto, depende del tipo de obrero. En una jornada laboral se sabe que:</p> 
 <ul> 
- <li>un <strong>alba&ntilde;il</strong> <em>consume</em> 100 ladrillos; su <em>aporte</em> es levantar 3 metros cuadrados de pared.</li> 
- <li>un <strong>gasista</strong> <em>consume</em> 3 metros de ca&ntilde;o y 20 f&oacute;sforos, su <em>aporte</em> es colocar 3 metros de ca&ntilde;o de gas (es el ca&ntilde;o que consumi&oacute;).</li> 
- <li>un <strong>plomero</strong> <em>consume</em> 10 metros de ca&ntilde;o y 30 arandelas, su <em>aporte</em> es colocar 9 metros de ca&ntilde;o de agua (son 9 de los 10 metros que consume; el resto es desperdicio).</li> 
- <li>un <strong>electricista</strong> <em>consume</em> 4 metros de cable y un rollo de cinta aisladora, su <em>aporte</em> es colocar los 4 metros de cable.</li> 
+ <li>un <strong>alba&ntilde;il</strong> consume 100 ladrillos.</li> 
+ <li>un <strong>gasista</strong> consume 3 metros de ca&ntilde;o y 20 f&oacute;sforos.</li> 
+ <li>un <strong>plomero</strong> consume 10 metros de ca&ntilde;o y 30 arandelas.</li> 
+ <li>un <strong>electricista</strong> consume 4 metros de cable y un rollo de cinta aisladora. (en las obras que modelamos, se usan los mismos ca&ntilde;nos para gas y para agua).</li> 
 </ul> 
-<p>De la obra se conoce cu&aacute;nto tiene de cada material: ladrillos, ca&ntilde;o, cable, cinta, f&oacute;sforos y arandelas.</p> 
-<p>En las obras que consideramos, se usan los mismos ca&ntilde;os para agua y para gas.</p> 
+<p>De cada obra hay que conocer la <em>plantilla</em> de obreros que est&aacute;n asignados a la misma. En cualquier momento se tiene que poder agregar o quitar a un obrero de la plantilla.<br /> A su vez, cada obrero puede estar de <em>licencia</em> o no, debe registrarse cuando entra en licencia y cuando sale de licencia (o sea, vuelve al trabajo activo).<br /> Los <strong>obreros disponibles</strong> para una obra son los que est&aacute;n en su plantilla, y no est&aacute;n de licencia.</p> 
 <br /> 
-<p><strong>Requerimiento</strong><br /> Construir este modelo de forma tal que se pueda <em>registrar una jornada laboral</em>. En esta etapa, alcanza con registrar el consumo de materiales de cada obrero disponible.</p> 
+<p><strong>Requerimiento</strong><br /> Construir este modelo de forma tal que se pueda <em>registrar una jornada laboral</em>. En esta etapa, lo que hay que hacer es registrar el consumo de materiales de cada obrero disponible. En etapas posteriores, agregaremos m&aacute;s aspectos relacionados con cada jornada laboral.</p> 
 <p>P.ej. supongamos una obra que tiene entre sus materiales, 1000 ladrillos, 400 metros de ca&ntilde;o, 8000 f&oacute;sforos y 500 arandelas. Tiene cinco obreros en plantilla: dos alba&ntilde;iles, dos gasistas y un plomero. Uno de los alba&ntilde;iles est&aacute; de licencia.</p> 
 <p>Despu&eacute;s de registrar una jornada laboral deben quedar:</p> 
 <ul> 
@@ -664,7 +662,6 @@ function setDocumentScrollTop(ypos)
  <li>7960 f&oacute;sforos (se restan 20 por cada uno de los dos gasistas), y</li> 
  <li>470 arandelas (se restan las 30 que consumi&oacute; el plomero).</li> 
 </ul> 
-<p>El <em>aporte</em> de cada obrero ser&aacute; considerado en una etapa posterior del modelo.</p> 
 <p>Tambi&eacute;n se debe poder:</p> 
 <ul> 
  <li>registrar la recepci&oacute;n de una cantidad de ladrillos.</li> 

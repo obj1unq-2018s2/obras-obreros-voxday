@@ -2,30 +2,38 @@
 Debemos armar un modelo de obras en construcción, y los obreros que trabajan en ellas.
 
 
-## Modelo básico
-Una obra requiere, para su finalización, de trabajos de distintas características. 
-A su vez, contamos con distintos tipos de obrero, los obreros de un tipo se encargarán de cierto trabajo.
-Del trabajo que realiza un obrero en una obra nos interesa: lo que _aporta_ para que la obra se vaya acercando a su finalización, y lo que _consume_ de materiales.
+## Plantilla, consumo de materiales
+En una obra trabajan obreros de distinto tipo. Consideramos cuatro tipos de obreros: _albañiles_, _plomeros_, _electricistas_ y _gasistas_.  
+El modelo que construyamos debe registrar, y dar información sobre, la actividad que desarrollan los obreros en cada _jornada laboral_, o sea, en cada día en que se trabaja en la obra. 
 
-Para cada obrero se debe registrar si está o no de licencia, esto puede cambiar en cualquier momento.
+Para llevar a cabo una obra, se requieren distintos materiales; en este modelo nos van a interesar los siguientes: ladrillos, caño, cable, cinta, fósforos y arandelas.
+Para cada obra, se debe conocer en cada momento el _stock disponible_ de cada uno de estos materiales. 
 
-Cada obra cuenta, en cada momento, con una plantilla con los obreros que están asignados a la misma. Los **obreros disponibles** para una obra son los que están en su plantilla, y no están de licencia. En cualquier momento se tiene que poder agregar o quitar a un obrero de la plantilla. 
+Los obreros _consumen_ estos materiales para llevar a cabo sus tareas. Qué consumen, y cuánto, depende del tipo de obrero. En una jornada laboral se sabe que:
+* un **albañil** consume 100 ladrillos.
+* un **gasista** consume 3 metros de caño y 20 fósforos.
+* un **plomero** consume 10 metros de caño y 30 arandelas.
+* un **electricista** consume 4 metros de cable y un rollo de cinta aisladora.
+(en las obras que modelamos, se usan los mismos cañnos para gas y para agua).
 
+De cada obra hay que conocer la _plantilla_ de obreros que están asignados a la misma.
+En cualquier momento se tiene que poder agregar o quitar a un obrero de la plantilla.   
+A su vez, cada obrero puede estar de _licencia_ o no, debe registrarse cuando entra en licencia y cuando sale de licencia (o sea, vuelve al trabajo activo).  
+Los **obreros disponibles** para una obra son los que están en su plantilla, y no están de licencia. 
+
+<!---
 Se deben considerar cuatro tipos de obreros: _albañiles_, _plomeros_, _electricistas_ y _gasistas_. En cada _jornada de trabajo_:
 * un **albañil** _consume_ 100 ladrillos; su _aporte_ es levantar 3 metros cuadrados de pared.
 * un **gasista** _consume_ 3 metros de caño y 20 fósforos, su _aporte_ es colocar 3 metros de caño de gas (es el caño que consumió).
 * un **plomero** _consume_ 10 metros de caño y 30 arandelas, su _aporte_ es colocar 9 metros de caño de agua (son 9 de los 10 metros que consume; el resto es desperdicio).
 * un **electricista** _consume_ 4 metros de cable y un rollo de cinta aisladora, su _aporte_ es colocar los 4 metros de cable.
-
-De la obra se conoce cuánto tiene de cada material: ladrillos, caño, cable, cinta, fósforos y arandelas.
-
-En las obras que consideramos, se usan los mismos caños para agua y para gas.
+--->
  
 <br> 
 
 **Requerimiento**  
 Construir este modelo de forma tal que se pueda _registrar una jornada laboral_. 
-En esta etapa, alcanza con registrar el consumo de materiales de cada obrero disponible.
+En esta etapa, lo que hay que hacer es registrar el consumo de materiales de cada obrero disponible. En etapas posteriores, agregaremos más aspectos relacionados con cada jornada laboral.
 
 P.ej. supongamos una obra que tiene entre sus materiales, 1000 ladrillos, 400 metros de caño, 8000 fósforos y 500 arandelas. Tiene cinco obreros en plantilla: dos albañiles, dos gasistas y un plomero. Uno de los albañiles está de licencia.
 
@@ -34,8 +42,6 @@ Después de registrar una jornada laboral deben quedar:
 * 384 metros de caño (se restan los 6 de los dos gasistas más los 10 del plomero),
 * 7960 fósforos (se restan 20 por cada uno de los dos gasistas), y
 * 470 arandelas (se restan las 30 que consumió el plomero).
-
-El _aporte_ de cada obrero será considerado en una etapa posterior del modelo.
 
 También se debe poder:
 * registrar la recepción de una cantidad de ladrillos.
