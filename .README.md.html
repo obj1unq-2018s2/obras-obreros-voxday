@@ -649,8 +649,9 @@ function setDocumentScrollTop(ypos)
  <li>un <strong>alba&ntilde;il</strong> consume 100 ladrillos.</li> 
  <li>un <strong>gasista</strong> consume 3 metros de ca&ntilde;o y 20 f&oacute;sforos.</li> 
  <li>un <strong>plomero</strong> consume 10 metros de ca&ntilde;o y 30 arandelas.</li> 
- <li>un <strong>electricista</strong> consume 4 metros de cable y un rollo de cinta aisladora. (en las obras que modelamos, se usan los mismos ca&ntilde;nos para gas y para agua).</li> 
+ <li>un <strong>electricista</strong> consume 4 metros de cable y un rollo de cinta aisladora.</li> 
 </ul> 
+<p>(en las obras que modelamos, se usan los mismos ca&ntilde;nos para gas y para agua).</p> 
 <p>De cada obra hay que conocer la <em>plantilla</em> de obreros que est&aacute;n asignados a la misma. En cualquier momento se tiene que poder agregar o quitar a un obrero de la plantilla.<br /> A su vez, cada obrero puede estar de <em>licencia</em> o no, debe registrarse cuando entra en licencia y cuando sale de licencia (o sea, vuelve al trabajo activo).<br /> Los <strong>obreros disponibles</strong> para una obra son los que est&aacute;n en su plantilla, y no est&aacute;n de licencia.</p> 
 <br /> 
 <p><strong>Requerimiento</strong><br /> Construir este modelo de forma tal que se pueda <em>registrar una jornada laboral</em>. En esta etapa, lo que hay que hacer es registrar el consumo de materiales de cada obrero disponible. En etapas posteriores, agregaremos m&aacute;s aspectos relacionados con cada jornada laboral.</p> 
@@ -669,28 +670,6 @@ function setDocumentScrollTop(ypos)
  <li>poder preguntarle a una obra si tiene a un determinado obrero en la plantilla.</li> 
 </ul> 
 <br /> 
-<h2> <a id="pago-de-jornales" class="anchor" href="#pago-de-jornales" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pago de jornales</h2> 
-<p>Agregar al modelo la informaci&oacute;n necesaria para saber cu&aacute;nto hay que pagarle a cada obrero en jornales adeudados, y para manejar el efectivo con que cuenta la obra.</p> 
-<p>Para esto, agregar en cada obrero, el dato de cu&aacute;ntos jornales se le adeudan. Este n&uacute;mero debe aumentar en uno para cada jornada laboral que realice el obrero; esto hay que agregarlo al registro de una jornada laboral en una obra.</p> 
-<p>El importe de jornal de cada obrero se pacta con <strong>UOCRA</strong>, el sindicato de obreros de la construcci&oacute;n. Se establecen tres valores: uno para alba&ntilde;il, otro para especialista de ba&ntilde;o y cocina (que incluye a gasistas y plomeros), otro para electricistas.</p> 
-<br /> 
-<p><strong>Requerimientos</strong></p> 
-<ul> 
- <li>Poder preguntar, para un obrero, cu&aacute;nto tiene para cobrar por jornales. Es el resultado de multiplicar la cantidad de jornales adeudados por el importe de jornal pactado con UOCRA.</li> 
- <li>Poder preguntar el importe total que una obra adeuda en jornales a los obreros de su plantilla.</li> 
- <li>Poder registrar el pago de jornales adeudados. Los efectos son: para cada obrero se cancelan los jornales adeudados, pasando a 0; el efectivo de la obra baja para reflejar el pago del importe total que adeuda la obra.</li> 
- <li>Poder registrar que se agrega un importe al efectivo de una obra.</li> 
-</ul> 
-<p>Siguiendo con el ejemplo anterior, supongamos que el obrero que estaba de licencia vuelve al trabajo, que el plomero sale de licencia, y que luego se registra otra jornada laboral en la obra. Los importes de jornales pactados con UOCRA son, en este ejemplo: 2000 pesos para alba&ntilde;iles, 3000 para especialistas de ba&ntilde;o y cocina, 3500 para electricistas. La obra tiene 100000 pesos en efectivo.</p> 
-<p>Despu&eacute;s de las dos jornadas laborales: el alba&ntilde;il que trabaj&oacute; dos d&iacute;as tiene 4000 pesos para cobrar por jornales; el otro alba&ntilde;il tiene 2000; los gasistas 6000 cada uno (ambos trabajaron dos d&iacute;as), el plomero 3000 pesos (trabaj&oacute; un d&iacute;a) y el electricista 7000 pesos. La obra debe en jornales 22000 pesos (la suma de lo que tiene cada obrero para cobrar).<br /> Si se registra el pago de jornales adeudados, entonces el importe que tiene para cobrar cada obrero es de 0 pesos, y el dinero en efectivo de la obra baja a 78000 pesos.</p> 
-<br /> 
-<h2> <a id="errores" class="anchor" href="#errores" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Errores</h2> 
-<p>Agregar al modelo el manejo de estos errores:</p> 
-<ul> 
- <li>Si se pide registrar una jornada laboral de una obra que no tiene obreros disponibles, debe generarse un error con mensaje &quot;No hay obreros disponibles para trabajar&quot;.</li> 
- <li>Un obrero no puede quitarse de la plantilla de una obra mientras est&aacute; de licencia. Si se intenta hacer esto, debe generarse un error con mensaje &quot;Las leyes laborales est&aacute;n para respetarse - licencia implica estabilidad laboral&quot;.</li> 
-</ul> 
-<br /> 
 <h2> <a id="registro-de-obras-de-un-obrero" class="anchor" href="#registro-de-obras-de-un-obrero" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Registro de obras de un obrero</h2> 
 <p>Agregar a cada obrero una colecci&oacute;n de las obras en las que trabaj&oacute;. Al agregar un obrero a la plantilla de una obra, en ese mismo momento, hay que agregar la obra a la colecci&oacute;n del obrero.</p> 
 <br /> 
@@ -699,23 +678,53 @@ function setDocumentScrollTop(ypos)
 <pre><code>roque.pasoPor(obraCasaDeLucas)
 </code></pre> 
 <br /> 
+<h2> <a id="errores" class="anchor" href="#errores" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Errores</h2> 
+<p>Agregar al modelo el manejo de estos errores:</p> 
+<ul> 
+ <li>Si se pide registrar una jornada laboral de una obra que no tiene obreros disponibles, debe generarse un error con mensaje &quot;No hay obreros disponibles para trabajar&quot;.</li> 
+ <li>Un obrero no puede quitarse de la plantilla de una obra mientras est&aacute; de licencia. Si se intenta hacer esto, debe generarse un error con mensaje &quot;Las leyes laborales est&aacute;n para respetarse - licencia implica estabilidad laboral&quot;.</li> 
+</ul> 
+<br /> 
+<h2> <a id="pago-de-jornales" class="anchor" href="#pago-de-jornales" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pago de jornales</h2> 
+<p>Agregar al modelo la informaci&oacute;n necesaria para saber cu&aacute;nto hay que pagarle a cada obrero en jornales adeudados, y para manejar el efectivo con que cuenta la obra.</p> 
+<p>Para esto, agregar en cada obrero, el dato de cu&aacute;ntos jornales se le adeudan. Este n&uacute;mero debe aumentar en uno para cada jornada laboral que realice el obrero; esto hay que agregarlo al registro de una jornada laboral en una obra.</p> 
+<p>El importe de jornal de cada obrero se pacta con <strong>UOCRA</strong>, el sindicato de obreros de la construcci&oacute;n. Se establecen tres valores: uno para alba&ntilde;il, otro para especialista de ba&ntilde;o y cocina (que incluye a gasistas y plomeros), otro para electricistas.</p> 
+<br /> 
+<p><strong>Requerimientos</strong></p> 
+<ul> 
+ <li>Poder preguntar, para un obrero, cu&aacute;nto tiene para cobrar por jornales. Es el resultado de multiplicar la cantidad de jornales adeudados por el importe de jornal pactado con UOCRA.<br /> <strong>Nota</strong>: se incluye un objeto al que se le pueden preguntar los distintos</li> 
+ <li>Poder preguntar el importe total que una obra adeuda en jornales a los obreros de su plantilla.</li> 
+ <li>Poder registrar el pago de jornales adeudados. Los efectos son: para cada obrero se cancelan los jornales adeudados, pasando a 0; el efectivo de la obra baja para reflejar el pago del importe total que adeuda la obra.</li> 
+ <li>Poder registrar que se agrega un importe al efectivo de una obra.</li> 
+</ul> 
+<p>Siguiendo con el ejemplo anterior, supongamos que el obrero que estaba de licencia vuelve al trabajo, que el plomero sale de licencia, y que luego se registra otra jornada laboral en la obra. Los importes de jornales pactados con UOCRA son, en este ejemplo: 2000 pesos para alba&ntilde;iles, 3000 para especialistas de ba&ntilde;o y cocina, 3500 para electricistas. La obra tiene 100000 pesos en efectivo.</p> 
+<p>Despu&eacute;s de las dos jornadas laborales: el alba&ntilde;il que trabaj&oacute; dos d&iacute;as tiene 4000 pesos para cobrar por jornales; el otro alba&ntilde;il tiene 2000; los gasistas 6000 cada uno (ambos trabajaron dos d&iacute;as), el plomero 3000 pesos (trabaj&oacute; un d&iacute;a) y el electricista 7000 pesos. La obra debe en jornales 22000 pesos (la suma de lo que tiene cada obrero para cobrar).<br /> Si se registra el pago de jornales adeudados, entonces el importe que tiene para cobrar cada obrero es de 0 pesos, y el dinero en efectivo de la obra baja a 78000 pesos.</p> 
+<br /> 
 <h2> <a id="avance-de-una-obra-tipos-de-obras" class="anchor" href="#avance-de-una-obra-tipos-de-obras" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Avance de una obra, tipos de obras</h2> 
 <p>Para que una obra se considere <em>finalizada</em> deben cumplimentarse varios requisitos. En este modelo simplificado contemplamos los siguientes:</p> 
 <ul> 
  <li>construir 50 metros cuadrados de <em>pared</em> por cada habitaci&oacute;n,</li> 
- <li>colocar la cantidad de <em>ca&ntilde;os de gas</em> que resultan de esta cuenta: <code>(ancho + profundidad) * cantidad de pisos * 5 metros</code>.</li> 
- <li>colocar 180 metros de <em>ca&ntilde;os de agua</em> por cada ba&ntilde;o.</li> 
- <li>colocar 50 metros por habitaci&oacute;n, m&aacute;s 100 metros adicionales por piso, de <em>cables</em>.</li> 
+ <li>colocar 10 <em>implementos de agua</em> (tramo de ca&ntilde;o, canilla, etc.) por cada ba&ntilde;o.</li> 
+ <li>colocar 8 <em>implmentos de gas</em> (tramo de ca&ntilde;o, llave de paso, etc.) por cada ba&ntilde;o, m&aacute;s 3 por cada habitaci&oacute;n.</li> 
+ <li>colocar 50 metros por habitaci&oacute;n, m&aacute;s 100 metros adicionales por piso, de <em>cables el&eacute;ctricos</em>.</li> 
 </ul> 
 <br /> 
-<p>Hay dos tipos de obra: <strong>casas</strong> y <strong>edificios</strong>. Para ambos se informa ancho y profundidad del terreno.</p> 
-<p>Para una <strong>casa</strong> se informa tambi&eacute;n: cantidad de habitaciones, cantidad de ba&ntilde;os (que no se consideran habitaciones), cantidad de pisos.</p> 
-<p>Para un <strong>edificio</strong> se informa: cantidad de pisos, cantidad de departamentos por piso, cantidad de habitaciones por departamento, cantidad de ascensores. Para cada ascensor hay que considerar 300 metros adicionales de cable. Se asume que cada departamento tiene exactamente un ba&ntilde;o, ni m&aacute;s ni menos.</p> 
+<p>Cada obrero <em>aporta</em> al avance de la obra en la que trabaja, de acuerdo a qu&eacute; tipo de obrero sea:</p> 
+<ul> 
+ <li>un <strong>alba&ntilde;il</strong> levanta 3 metros cuadrados de pared por d&iacute;a.</li> 
+ <li>un <strong>gasista</strong> coloca un implemento de gas por d&iacute;a.</li> 
+ <li>un <strong>plomero</strong> coloca un implemento de agua cada dos d&iacute;as. Para simplificar, consideremos que coloca medio implemento por d&iacute;a.</li> 
+ <li>un <strong>electricista</strong> coloca 4 metros de cable el&eacute;ctrico por d&iacute;a.</li> 
+</ul> 
+<br /> 
+<p>Hay dos tipos de obra: <strong>casas</strong> y <strong>edificios</strong>.</p> 
+<p>Para una <strong>casa</strong> se informa: cantidad de habitaciones y cantidad de ba&ntilde;os (que no se consideran habitaciones). Las casas son de un piso.</p> 
+<p>Para un <strong>edificio</strong> se informa: cantidad de pisos, cantidad de departamentos por piso, cantidad de habitaciones por departamento (en este modelo, se asume que todos los departamentos de un edificio tienen la misma cantidad de habitaciones), cantidad de ascensores. Para cada ascensor hay que considerar 300 metros adicionales de cable el&eacute;ctrico. Se asume que cada departamento tiene exactamente un ba&ntilde;o, ni m&aacute;s ni menos.</p> 
 <br /> 
 <p><strong>Requerimientos</strong></p> 
 <ul> 
- <li>Agregar al registro de una jornada laboral, el <em>aporte</em> que hace cada obrero. Para eso, cada obra debe llevar un acumulado de metros cuadrados construidos, y metros de ca&ntilde;os de gas, ca&ntilde;os de agua y cables colocados.</li> 
- <li>Poder preguntar si una obra <em>est&aacute; terminada</em> o no. Est&aacute; terminada si el acumulado de metros cuadrados construidos supera al que corresponde a los requisitos, y lo mismo para ca&ntilde;os de gas, ca&ntilde;os de agua y cables.</li> 
+ <li>Agregar al registro de una jornada laboral, el <em>aporte</em> que hace cada obrero. Para eso, cada obra debe llevar un acumulado de metros cuadrados construidos, e implementos de agua, implementos de gas y cables el&eacute;ctricos colocados.</li> 
+ <li>Poder preguntar si una obra <em>est&aacute; terminada</em> o no. Est&aacute; terminada si el acumulado de metros cuadrados construidos es mayor o igual al que corresponde a los requisitos, y lo mismo para implementos de gas, implmentos de agua, y cables el&eacute;ctricos.</li> 
 </ul>
 </body>
 </html>
