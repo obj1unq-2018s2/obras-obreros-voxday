@@ -52,48 +52,11 @@ También se debe poder:
 
 <br>
 
-## Registro de obras de un obrero 
-Agregar a cada obrero una colección de las obras en las que trabajó. Al agregar un obrero a la plantilla de una obra, en ese mismo momento, hay que agregar la obra a la colección del obrero. 
-
-<br> 
-
-**Requerimiento**  
-
-Poder preguntar si un obrero _pasó por una obra_, o sea, si está entre las obras en las que trabajó. P.ej. 
-```
-roque.pasoPor(obraCasaDeLucas)
-```
-
-<br>
-
 ## Errores
 Agregar al modelo el manejo de estos errores:
 * Si se pide registrar una jornada laboral de una obra que no tiene obreros disponibles, debe generarse un error con mensaje "No hay obreros disponibles para trabajar".
 * Un obrero no puede quitarse de la plantilla de una obra mientras está de licencia. Si se intenta hacer esto, debe generarse un error con mensaje "Las leyes laborales están para respetarse - licencia implica estabilidad laboral". 
 
-<br>
-
-## Pago de jornales
-Agregar al modelo la información necesaria para saber cuánto hay que pagarle a cada obrero en jornales adeudados, y para manejar el efectivo con que cuenta la obra.
-
-Para esto, agregar en cada obrero, el dato de cuántos jornales se le adeudan. Este número debe aumentar en uno para cada jornada laboral que realice el obrero; esto hay que agregarlo al registro de una jornada laboral en una obra.
-
-El importe de jornal de cada obrero se pacta con **UOCRA**, el sindicato de obreros de la construcción. Se establecen tres valores: uno para albañil, otro para especialista de baño y cocina (que incluye a gasistas y plomeros), otro para electricistas.
- 
-<br> 
-
-**Requerimientos**  
-* Poder preguntar, para un obrero, cuánto tiene para cobrar por jornales. Es el resultado de multiplicar la cantidad de jornales adeudados por el importe de jornal pactado con UOCRA.  
-**Nota**: se incluye un objeto al que se le pueden preguntar los distintos 
-* Poder preguntar el importe total que una obra adeuda en jornales a los obreros de su plantilla.
-* Poder registrar el pago de jornales adeudados. Los efectos son: para cada obrero se cancelan los jornales adeudados, pasando a 0; el efectivo de la obra baja para reflejar el pago del importe total que adeuda la obra.
-* Poder registrar que se agrega un importe al efectivo de una obra.  
-
-Siguiendo con el ejemplo anterior, supongamos que el obrero que estaba de licencia vuelve al trabajo, que el plomero sale de licencia, y que luego se registra otra jornada laboral en la obra. Los importes de jornales pactados con UOCRA son, en este ejemplo: 2000 pesos para albañiles, 3000 para especialistas de baño y cocina, 3500 para electricistas. La obra tiene 100000 pesos en efectivo.
-
-Después de las dos jornadas laborales: el albañil que trabajó dos días tiene 4000 pesos para cobrar por jornales; el otro albañil tiene 2000; los gasistas 6000 cada uno (ambos trabajaron dos días), el plomero 3000 pesos (trabajó un día) y el electricista 7000 pesos. La obra debe en jornales 22000 pesos (la suma de lo que tiene cada obrero para cobrar).  
-Si se registra el pago de jornales adeudados, entonces el importe que tiene para cobrar cada obrero es de 0 pesos, y el dinero en efectivo de la obra baja a 78000 pesos.     
-  
 
 <br> 
 
@@ -127,4 +90,43 @@ Para un **edificio** se informa: cantidad de pisos, cantidad de departamentos po
 **Requerimientos**    
 * Agregar al registro de una jornada laboral, el _aporte_ que hace cada obrero. Para eso, cada obra debe llevar un acumulado de metros cuadrados construidos, e implementos de agua, implementos de gas y cables eléctricos colocados.
 * Poder preguntar si una obra _está terminada_ o no. Está terminada si el acumulado de metros cuadrados construidos es mayor o igual al que corresponde a los requisitos, y lo mismo para implementos de gas, implmentos de agua, y cables eléctricos.
+
+
+<br>
+
+## Registro de obras de un obrero 
+Agregar a cada obrero una colección de las obras en las que trabajó. Al agregar un obrero a la plantilla de una obra, en ese mismo momento, hay que agregar la obra a la colección del obrero. 
+
+<br> 
+
+**Requerimiento**  
+
+Poder preguntar si un obrero _pasó por una obra_, o sea, si está entre las obras en las que trabajó. P.ej. 
+```
+roque.pasoPor(obraCasaDeLucas)
+```
+
+<br>
+
+## Pago de jornales
+Agregar al modelo la información necesaria para saber cuánto hay que pagarle a cada obrero en jornales adeudados, y para manejar el efectivo con que cuenta la obra.
+
+Para esto, agregar en cada obrero, el dato de cuántos jornales se le adeudan. Este número debe aumentar en uno para cada jornada laboral que realice el obrero; esto hay que agregarlo al registro de una jornada laboral en una obra.
+
+El importe de jornal de cada obrero se pacta con **UOCRA**, el sindicato de obreros de la construcción. Se establecen tres valores: uno para albañil, otro para especialista de baño y cocina (que incluye a gasistas y plomeros), otro para electricistas.
+ 
+<br> 
+
+**Requerimientos**  
+* Poder preguntar, para un obrero, cuánto tiene para cobrar por jornales. Es el resultado de multiplicar la cantidad de jornales adeudados por el importe de jornal pactado con UOCRA.  
+**Nota**: se incluye un objeto al que se le pueden preguntar los distintos jornales pactados con UOCRA.
+* Poder preguntar el importe total que una obra adeuda en jornales a los obreros de su plantilla.
+* Poder registrar el pago de jornales adeudados. Los efectos son: para cada obrero se cancelan los jornales adeudados, pasando a 0; el efectivo de la obra baja para reflejar el pago del importe total que adeuda la obra.
+* Poder registrar que se agrega un importe al efectivo de una obra.  
+
+Siguiendo con el ejemplo anterior, supongamos que el obrero que estaba de licencia vuelve al trabajo, que el plomero sale de licencia, y que luego se registra otra jornada laboral en la obra. Los importes de jornales pactados con UOCRA son, en este ejemplo: 2000 pesos para albañiles, 3000 para especialistas de baño y cocina, 3500 para electricistas. La obra tiene 100000 pesos en efectivo.
+
+Después de las dos jornadas laborales: el albañil que trabajó dos días tiene 4000 pesos para cobrar por jornales; el otro albañil tiene 2000; los gasistas 6000 cada uno (ambos trabajaron dos días), el plomero 3000 pesos (trabajó un día) y el electricista 7000 pesos. La obra debe en jornales 22000 pesos (la suma de lo que tiene cada obrero para cobrar).  
+Si se registra el pago de jornales adeudados, entonces el importe que tiene para cobrar cada obrero es de 0 pesos, y el dinero en efectivo de la obra baja a 78000 pesos.     
+  
 
