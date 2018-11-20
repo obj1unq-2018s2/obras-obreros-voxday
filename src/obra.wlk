@@ -10,10 +10,30 @@ class Obra {
 	var property implementosDeAguaColocados = 0
 	var property implementosDeGasColocados = 0
 	var property cablesElectricosColocados = 0
+	var plantillaDeObreros = []
 	
 	method habitaciones()	
 	method pisos()
 	method banios() 
+	
+	method recepcion(material){
+		
+	}
+	method estaEnLaPlantilla(obrero) = plantillaDeObreros.contains(obrero)
+	
+	method obrerosDisponibles() = plantillaDeObreros.filter{obrero => not (obrero.estaDeLicencia())}
+	
+	method agregar(obrero){
+		plantillaDeObreros.add(obrero)
+	}
+	
+	method quitar(obrero){
+		plantillaDeObreros.remove(obrero)
+	}
+	
+	method jornadaLaboral(){
+		self.obrerosDisponibles().forEach {obrero => obrero.consumo(self)}
+	}
 }
 
 
